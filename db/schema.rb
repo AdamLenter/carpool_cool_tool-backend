@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_04_182736) do
+ActiveRecord::Schema.define(version: 2022_04_04_191034) do
 
   create_table "bank_accounts", force: :cascade do |t|
     t.integer "user_id"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2022_04_04_182736) do
     t.string "location_type"
   end
 
-  create_table "user_accounts", force: :cascade do |t|
+  create_table "user_transactions", force: :cascade do |t|
     t.integer "user_id"
     t.float "inflow_amount"
     t.float "outflow_amount"
