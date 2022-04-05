@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_04_191034) do
+ActiveRecord::Schema.define(version: 2022_04_05_000945) do
 
   create_table "bank_accounts", force: :cascade do |t|
     t.integer "user_id"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2022_04_04_191034) do
     t.string "username"
     t.string "address1"
     t.string "address2"
-    t.string "city"
+    t.integer "city_id"
     t.string "state"
     t.string "zip"
     t.string "cellphone_number"
