@@ -17,6 +17,13 @@ class ApplicationController < Sinatra::Base
     locations.to_json(include: :city)
   end
 
+  get "/locations" do
+    locations = Location.all;
+    locations.to_json(include: :city)
+  end
+
+
+
   post '/users' do 
     user = User.create(
       first_name: params[:firstName], 
@@ -34,4 +41,22 @@ class ApplicationController < Sinatra::Base
     )
     user.to_json
   end
+
+  
+  post '/carpools' do 
+    carpool = Carpool.create(
+      carpool_date: params[:date], 
+      departure_time: params[:time], 
+      driver_user_id: params[:driverUserID], 
+      number_of_guests_available: params[:carGuestCapacity], 
+      one_way_cost: params[:oneWayCost], 
+      origin_location_id: params[:originLocationId], 
+      destination_location_id: params[:destinationLocationId]
+    )
+
+    # puts carpool;
+    carpool.to_json
+  end
+
+
 end
