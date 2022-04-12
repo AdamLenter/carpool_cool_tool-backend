@@ -22,8 +22,6 @@ class ApplicationController < Sinatra::Base
     locations.to_json(include: :city)
   end
 
-
-
   post '/users' do 
     user = User.create(
       first_name: params[:firstName], 
@@ -41,7 +39,6 @@ class ApplicationController < Sinatra::Base
     )
     user.to_json
   end
-
   
   post '/carpools' do 
     carpool = Carpool.create(
@@ -57,6 +54,14 @@ class ApplicationController < Sinatra::Base
     # puts carpool;
     carpool.to_json
   end
+  
+  get '/carpools_as_driver/:id' do
+    carpools = Carpool.where("driver_user_id = #{params[:id]}")
+    
+    carpools.to_json(include: [:origin_location, :destination_location, :users])
+  end
 
-
+  # get `/carpool_guests` do 
+  #   carpool
+  # end
 end

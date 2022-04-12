@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_05_000945) do
+ActiveRecord::Schema.define(version: 2022_04_12_024221) do
 
   create_table "bank_accounts", force: :cascade do |t|
     t.integer "user_id"
@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2022_04_05_000945) do
     t.string "account_number"
   end
 
-  create_table "carpool_guest", force: :cascade do |t|
+  create_table "carpool_guests", force: :cascade do |t|
     t.integer "carpool_id"
     t.integer "user_id"
   end
