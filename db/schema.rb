@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_12_024221) do
+ActiveRecord::Schema.define(version: 2022_04_13_132440) do
 
   create_table "bank_accounts", force: :cascade do |t|
     t.integer "user_id"
@@ -44,11 +44,12 @@ ActiveRecord::Schema.define(version: 2022_04_12_024221) do
   end
 
   create_table "user_transactions", force: :cascade do |t|
-    t.integer "user_id"
-    t.float "inflow_amount"
-    t.float "outflow_amount"
+    t.integer "sender_user_id"
+    t.float "transaction_amount"
     t.integer "carpool_guest_id"
     t.integer "bank_account_id"
+    t.integer "recipient_user_id"
+    t.date "user_transaction_date"
   end
 
   create_table "users", force: :cascade do |t|

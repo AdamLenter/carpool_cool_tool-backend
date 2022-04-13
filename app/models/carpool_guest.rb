@@ -1,5 +1,5 @@
 class CarpoolGuest < ActiveRecord::Base
     belongs_to :carpool
-    belongs_to :user 
-    belongs_to :user_transaction
+    belongs_to :user
+    has_many :user_transactions
 end
