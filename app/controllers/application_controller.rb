@@ -53,6 +53,14 @@ class ApplicationController < Sinatra::Base
     # puts carpool;
     carpool.to_json
   end
+
+  post '/carpool_guests' do 
+    carpool_guest = CarpoolGuest.create(
+      carpool_id: params[:carpoolId], 
+      user_id: params[:userId]
+      )
+    carpool_guest.to_json
+  end
   
   get '/carpools_as_driver/:id' do
     carpools = Carpool.where("driver_user_id = #{params[:id]}")
