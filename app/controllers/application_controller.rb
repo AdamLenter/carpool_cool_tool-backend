@@ -74,8 +74,8 @@ class ApplicationController < Sinatra::Base
     carpool.to_json(include: [:origin_location, :destination_location, :carpool_guests, :users, :user_transactions])
   end
 
-  get '/find_carpools/:date/:origin_location_id/:destination_location_id' do 
-    carpools = Carpool.where("carpool_date = '#{params[:date]}' and origin_location_id = #{params[:origin_location_id]} and destination_location_id = #{params[:destination_location_id]}")
+  get '/find_carpools/:user_id/:date/:origin_location_id/:destination_location_id' do 
+    carpools = Carpool.where("carpool_date = '#{params[:date]}' and origin_location_id = #{params[:origin_location_id]} and destination_location_id = #{params[:destination_location_id]} and driver_user_id != #{params[:user_id]}")
     carpools.to_json(include: [:origin_location, :destination_location, :carpool_guests, :users, :user_transactions, :driver_user])
   end
 
