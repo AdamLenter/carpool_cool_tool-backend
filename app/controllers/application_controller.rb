@@ -50,7 +50,6 @@ class ApplicationController < Sinatra::Base
       origin_location_id: params[:originLocationId], 
       destination_location_id: params[:destinationLocationId]
     )
-
     # puts carpool;
     carpool.to_json
   end
@@ -61,7 +60,15 @@ class ApplicationController < Sinatra::Base
     carpools.to_json(include: [:origin_location, :destination_location, :carpool_guests, :users, :user_transactions])
   end
 
-  # get `/carpool_guests` do 
-  #   carpool
-  # end
+  get '/carpool/:id' do
+    carpool = Carpool.find(params[:id])
+    
+    carpool.to_json(include: [:origin_location, :destination_location, :carpool_guests, :users, :user_transactions])
+  end
+
+  get '/find_carpools/:date/:origin_location_id/:destination_location_id' do 
+    carpools = Carpool.where("carpool_date = '#{params[:date]}' and origin_location_id = #{params[:origin_location_id]} and destination_location_id = #{params[:destination_location_id]}")
+    carpools.to_json(include: [:origin_location, :destination_location, :carpool_guests, :users, :user_transactions, :driver_user])
+  end
+
 end
