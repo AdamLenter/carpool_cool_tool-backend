@@ -4,7 +4,7 @@ class ApplicationController < Sinatra::Base
   # Add your routes here
   get "/users" do
     users = User.all
-    users.to_json(:include => {:carpools_as_driver => {:include => [:origin_location, :destination_location]}, :carpools_as_guest => {:include => [:origin_location, :destination_location, :driver_user]}})
+    users.to_json(:include => {:carpools_as_driver => {:include => [:origin_location, :destination_location, :driver_user]}, :carpools_as_guest => {:include => [:origin_location, :destination_location, :driver_user]}})
   end
 
   get "/cities" do
@@ -71,7 +71,7 @@ class ApplicationController < Sinatra::Base
   get '/carpool/:id' do
     carpool = Carpool.find(params[:id])
     
-    carpool.to_json(include: [:origin_location, :destination_location, :carpool_guests, :users, :user_transactions])
+    carpool.to_json(include: [:origin_location, :destination_location, :carpool_guests, :users, :user_transactions, :driver_user])
   end
 
   get '/find_carpools/:user_id/:date/:origin_location_id/:destination_location_id' do 
