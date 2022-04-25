@@ -4,7 +4,7 @@ class ApplicationController < Sinatra::Base
   # Add your routes here
   get "/users" do
     users = User.all
-    users.to_json(include: [:carpools_as_guest, :carpools_as_driver])
+    users.to_json(:include => {:carpools_as_driver => {:include => [:origin_location, :destination_location]}, :carpools_as_guest => {:include => [:origin_location, :destination_location, :driver_user]}})
   end
 
   get "/cities" do
