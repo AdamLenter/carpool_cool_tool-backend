@@ -79,4 +79,21 @@ class ApplicationController < Sinatra::Base
     carpools.to_json(include: [:origin_location, :destination_location, :carpool_guests, :users, :user_transactions, :driver_user])
   end
 
+  patch '/mark_carpool_complete/:id' do
+    carpool_to_update = Carpool.find(params[:id])
+    carpool_to_update.update(carpool_complete: params[:complete])
+    carpool_to_update.to_json;
+  end
+
+  post '/carpool_transactions' do 
+    user_transaction = UserTransaction.create(
+      sender_user_id: params[:sender_user_id], 
+      transaction_amount: params[:transaction_amount], 
+      carpool_guest_id: params[:carpool_guest_id], 
+      recipient_user_id: params[:recipient_user_id],
+      user_transaction_date: params[:user_transaction_date]
+      )
+      user_transaction.to_json
+  end
+
 end
