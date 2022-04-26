@@ -39,6 +39,11 @@ class ApplicationController < Sinatra::Base
     carpools.to_json(include: [:origin_location, :destination_location, :carpool_guests, :users, :user_transactions, :driver_user])
   end
 
+  get '/user_transactions/:user_id' do 
+    user_transactions = UserTransaction.where("sender_user_id == #{params[:user_id]}  or recipient_user_id == #{params[:user_id]}")
+    user_transactions.to_json(include: [:sender_user, :recipient_user])
+  end
+
   post '/users' do 
     user = User.create(
       first_name: params[:firstName], 
