@@ -41,7 +41,12 @@ class ApplicationController < Sinatra::Base
 
   get '/user_transactions/:user_id' do 
     user_transactions = UserTransaction.where("sender_user_id == #{params[:user_id]}  or recipient_user_id == #{params[:user_id]}")
-    user_transactions.to_json(include: [:sender_user, :recipient_user])
+    user_transactions.to_json(include: [:sender_user, :recipient_user, :bank_account])
+  end
+
+  get '/bank_accounts/:user_id' do 
+    bank_accounts = BankAccount.where("user_id == #{params[:user_id]}")
+    bank_accounts.to_json
   end
 
   post '/users' do 
@@ -93,6 +98,19 @@ class ApplicationController < Sinatra::Base
       user_transaction_date: params[:user_transaction_date]
       )
       user_transaction.to_json
+  end
+
+  post '/bank_transaction' do 
+    bank_transaction = UserTransaction.create(
+      sender_user_id: params[:sender_user_id] ? params[:sender_user_id] : nil, 
+      transaction_amount: params[:transaction_amount], 
+      carpool_guest_id: nil, 
+      recipient_user_id: params[:recipient_user_id] ? params[:recipient_user_id] : nil,
+      user_transaction_date: params[:user_transaction_date], 
+      bank_account_id: params[:bank_account_id]
+      )
+
+    bank_transaction.to_json
   end
 
   patch '/mark_carpool_complete/:id' do
