@@ -113,6 +113,15 @@ class ApplicationController < Sinatra::Base
     bank_transaction.to_json
   end
 
+  post '/bank_account' do 
+    bank_account = BankAccount.create(
+      user_id: params[:user_id], 
+      bank_name: params[:bank_name], 
+      account_number: params[:account_number]
+    )
+    bank_account.to_json
+  end
+
   patch '/mark_carpool_complete/:id' do
     carpool_to_update = Carpool.find(params[:id])
     carpool_to_update.update(carpool_complete: params[:complete])
